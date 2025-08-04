@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 80%, rgba(29, 161, 242, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(29, 161, 242, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(29, 161, 242, 0.03) 0%, transparent 50%);
@@ -49,7 +49,7 @@
             padding: 48px;
             width: 100%;
             max-width: 600px;
-            box-shadow: 
+            box-shadow:
                 0 24px 48px rgba(0, 0, 0, 0.4),
                 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
             position: relative;
@@ -61,6 +61,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -80,8 +81,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         h1 {
@@ -258,9 +266,22 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-8px);
+            }
+
+            60% {
+                transform: translateY(-4px);
+            }
         }
 
         .positive {
@@ -308,8 +329,13 @@
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         .stats {
@@ -363,12 +389,15 @@
                 transform: translateY(100vh) rotate(0deg);
                 opacity: 0;
             }
+
             10% {
                 opacity: 1;
             }
+
             90% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
@@ -421,16 +450,12 @@
 
         <form method="POST" class="form-container">
             <div class="tweet-input-container">
-                <textarea 
-                    name="tweet" 
-                    class="tweet-input" 
-                    placeholder="What's happening? Share your thoughts and discover their sentiment..."
-                    maxlength="280"
-                    oninput="updateCharCounter(this)"
-                >{{ tweet }}</textarea>
+                <textarea name="tweet" class="tweet-input"
+                    placeholder="What's happening? Share your thoughts and discover their sentiment..." maxlength="280"
+                    oninput="updateCharCounter(this)">{{ tweet }}</textarea>
                 <div class="char-counter" id="charCounter">0 / 280</div>
             </div>
-            
+
             <button type="submit" class="analyze-btn">
                 <i class="fas fa-brain" style="margin-right: 8px;"></i>
                 Analyze Sentiment
@@ -439,9 +464,10 @@
 
         {% if sentiment %}
         <div class="result-container">
-            <div class="result-card {% if sentiment == 'Positive Tweet' %}positive{% elif sentiment == 'Negative Tweet' %}negative{% else %}neutral{% endif %}">
+            <div
+                class="result-card {% if sentiment == 'Positive Tweet' %}positive{% elif sentiment == 'Negative Tweet' %}negative{% else %}neutral{% endif %}">
                 <div class="result-label">Analysis Result</div>
-                
+
                 <div class="sentiment-result">
                     {% if sentiment == 'Positive Tweet' %}
                     <i class="fas fa-smile-beam sentiment-icon"></i>
@@ -456,12 +482,15 @@
                 </div>
 
                 <div class="confidence-bar">
-                    <div class="confidence-fill" style="width: {% if sentiment == 'Positive Tweet' %}85{% elif sentiment == 'Negative Tweet' %}78{% else %}65{% endif %}%;"></div>
+                    <div class="confidence-fill"
+                        style="width: {% if sentiment == 'Positive Tweet' %}85{% elif sentiment == 'Negative Tweet' %}78{% else %}65{% endif %}%;">
+                    </div>
                 </div>
 
                 <div class="stats">
                     <div class="stat-item">
-                        <span class="stat-value">{% if sentiment == 'Positive Tweet' %}85{% elif sentiment == 'Negative Tweet' %}78{% else %}65{% endif %}%</span>
+                        <span class="stat-value">{% if sentiment == 'Positive Tweet' %}85{% elif sentiment == 'Negative
+                            Tweet' %}78{% else %}65{% endif %}%</span>
                         <span class="stat-label">Confidence</span>
                     </div>
                     <div class="stat-item">
@@ -483,9 +512,9 @@
             const counter = document.getElementById('charCounter');
             const length = textarea.value.length;
             const maxLength = 280;
-            
+
             counter.textContent = `${length} / ${maxLength}`;
-            
+
             counter.className = 'char-counter';
             if (length > maxLength * 0.8) {
                 counter.classList.add('warning');
@@ -497,7 +526,7 @@
         }
 
         // Initialize character counter on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const textarea = document.querySelector('.tweet-input');
             if (textarea) {
                 updateCharCounter(textarea);
@@ -505,13 +534,13 @@
         });
 
         // Add smooth scrolling to results
-        document.querySelector('form').addEventListener('submit', function() {
-            setTimeout(function() {
+        document.querySelector('form').addEventListener('submit', function () {
+            setTimeout(function () {
                 const resultContainer = document.querySelector('.result-container');
                 if (resultContainer) {
-                    resultContainer.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center' 
+                    resultContainer.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
                     });
                 }
             }, 100);
@@ -524,17 +553,17 @@
             "Type your tweet to analyze its emotional tone...",
             "Share your feelings and let AI analyze them..."
         ];
-        
+
         let currentIndex = 0;
         const textarea = document.querySelector('.tweet-input');
-        
+
         function rotatePlaceholder() {
             if (textarea && !textarea.value) {
                 textarea.placeholder = placeholderTexts[currentIndex];
                 currentIndex = (currentIndex + 1) % placeholderTexts.length;
             }
         }
-        
+
         setInterval(rotatePlaceholder, 4000);
     </script>
 </body>
